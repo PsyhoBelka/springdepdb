@@ -21,13 +21,20 @@
         </select>
     </p>
     <p>Choose specialities here:
-        <select form="newCollege" th:object="${specialities}" id="specialities">
+        <!--<select form="newCollege" th:object="${specialities}" id="specialities">
             <option disabled value="0">Choose specilities here:</option>
             <option th:each="speciality : ${specilities}"
                     th:value="${specilility.id}"
                     th:utext="${specilaity.code} + ${speciality.name}"></option>
-        </select>
+        </select>-->
+    <ul>
+        <li th:each="speciality : ${specialities}">
+            <input type="checkbox" th:utext="${speciality.name}" th:value="${speciality.id}"/>
+
+        </li>
+    </ul>
     </p>
+
 
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>
