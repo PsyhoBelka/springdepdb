@@ -1,6 +1,6 @@
-package ua.rozhkov.springdepdb.entity.core;
+package ua.rozhkov.springdepdb.DAO.entity.core;
 
-import ua.rozhkov.springdepdb.entity.CollegeSpeciality;
+import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +12,8 @@ import java.util.Set;
 public class Speciality {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name", unique = true)
@@ -22,12 +23,15 @@ public class Speciality {
     private String code;
 
     @OneToMany(mappedBy = "speciality")
-    private Set<CollegeSpeciality> colleges = new HashSet<CollegeSpeciality>();
+    private Set<CollegeSpeciality> colleges = new HashSet<>();
 
-    public Speciality(long id, String name, String code) {
-        this.id = id;
+    public Speciality(String name, String code) {
         this.name = name;
         this.code = code;
+    }
+
+    public Speciality() {
+
     }
 
     public long getId() {

@@ -1,6 +1,6 @@
-package ua.rozhkov.springdepdb.entity.core;
+package ua.rozhkov.springdepdb.DAO.entity.core;
 
-import ua.rozhkov.springdepdb.entity.CollegeSpeciality;
+import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class College {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -29,12 +29,16 @@ public class College {
     private String phone;
 
     @Column(name = "ownerShip")
-    private String ownerShip;
+    @Enumerated(EnumType.STRING)
+    private OwnerShip ownerShip;
 
     @OneToMany(mappedBy = "college")
-    private Set<CollegeSpeciality> specialities = new HashSet<CollegeSpeciality>();
+    private Set<CollegeSpeciality> specialities = new HashSet<>();
 
-    public College(String name, String address, String director, String phone, String ownerShip) {
+    public College() {
+    }
+
+    public College(String name, String address, String director, String phone, OwnerShip ownerShip) {
         this.name = name;
         this.address = address;
         this.director = director;
@@ -82,11 +86,11 @@ public class College {
         this.phone = phone;
     }
 
-    public String getOwnerShip() {
+    public OwnerShip getOwnerShip() {
         return ownerShip;
     }
 
-    public void setOwnerShip(String ownerShip) {
+    public void setOwnerShip(OwnerShip ownerShip) {
         this.ownerShip = ownerShip;
     }
 
