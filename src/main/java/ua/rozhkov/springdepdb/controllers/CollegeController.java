@@ -5,12 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.rozhkov.springdepdb.DAO.entity.core.Base;
 import ua.rozhkov.springdepdb.DAO.entity.core.College;
 import ua.rozhkov.springdepdb.DAO.entity.core.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.core.Speciality;
 import ua.rozhkov.springdepdb.service.CollegeService;
+import ua.rozhkov.springdepdb.service.CollegeSpecialityService;
 import ua.rozhkov.springdepdb.service.SpecialityService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,11 +25,13 @@ public class CollegeController {
     private CollegeService collegeService;
     private List<OwnerShip> collegeOwnerShips;
     private SpecialityService specialityService;
+    private CollegeSpecialityService collegeSpecialityService;
 
-    public CollegeController(CollegeService collegeService, SpecialityService specialityService) {
+    public CollegeController(CollegeService collegeService, SpecialityService specialityService, CollegeSpecialityService collegeSpecialityService) {
         this.collegeService = collegeService;
         collegeOwnerShips = Arrays.asList(OwnerShip.values());
         this.specialityService = specialityService;
+        this.collegeSpecialityService = collegeSpecialityService;
     }
 
     @RequestMapping("/list")
@@ -45,8 +51,15 @@ public class CollegeController {
     }
 
     @RequestMapping("/addNewCollege")
-    public String addNewCollege(@ModelAttribute College newCollege, @ModelAttribute String[] specialities) {
-        collegeService.add(newCollege);
+    public String addNewCollege(@ModelAttribute College newCollege,
+                                @RequestParam("checkedSpecialities") List<String> checkedSpecialities) {
+        List<Speciality> checkedSpecialityList = new ArrayList<>();
+        for (String id :
+                checkedSpecialities) {
+            checkedSpecialityList.add(specialityService.findById(Long.parseLong(id)));
+        }
+        College tmpCollege = collegeService.findById(collegeService.add(newCollege));
+        collegeSpecialityService.addSpecialitiesToCollege(tmpCollege, checkedSpecialities, 5, Base.NINE_CLASS);
         return "redirect:/college/list";
     }
 

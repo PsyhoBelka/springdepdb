@@ -1,16 +1,31 @@
 package ua.rozhkov.springdepdb;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ua.rozhkov.springdepdb.DAO.entity.core.Speciality;
+import ua.rozhkov.springdepdb.service.CollegeService;
+import ua.rozhkov.springdepdb.service.SpecialityService;
 
 @SpringBootApplication
-public class SpringdepdbApplication {
+public class SpringdepdbApplication implements CommandLineRunner {
+    @Autowired
+    private SpecialityService specialityService;
+    @Autowired
+    private CollegeService collegeService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringdepdbApplication.class, args);
     }
 
-   /* @Bean
+    @Override
+    public void run(String... args) throws Exception {
+        specialityService.add(new Speciality("111", "111"));
+        specialityService.add(new Speciality("222", "222"));
+    }
+
+    /* @Bean
     public DataSource dataSource() {
         final EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
         embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2);

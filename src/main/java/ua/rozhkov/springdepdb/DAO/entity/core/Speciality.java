@@ -13,7 +13,7 @@ public class Speciality {
 
     @Id
     @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name", unique = true)
@@ -22,7 +22,8 @@ public class Speciality {
     @Column(name = "code", unique = true)
     private String code;
 
-    @OneToMany(mappedBy = "speciality")
+
+    @OneToMany(mappedBy = "speciality", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CollegeSpeciality> colleges = new HashSet<>();
 
     public Speciality(String name, String code) {

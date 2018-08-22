@@ -3,18 +3,15 @@ package ua.rozhkov.springdepdb.service;
 import org.springframework.stereotype.Service;
 import ua.rozhkov.springdepdb.DAO.entity.core.College;
 import ua.rozhkov.springdepdb.DAO.repository.CollegeRepository;
-import ua.rozhkov.springdepdb.DAO.repository.CollegeSpecialityRepository;
 
 import java.util.List;
 
 @Service
 public class CollegeService implements BaseService<College, Long> {
     private CollegeRepository collegeRepository;
-    private CollegeSpecialityRepository collegeSpecialityRepository;
 
-    public CollegeService(CollegeRepository collegeRepository, CollegeSpecialityRepository collegeSpecialityRepository) {
+    public CollegeService(CollegeRepository collegeRepository) {
         this.collegeRepository = collegeRepository;
-        this.collegeSpecialityRepository = collegeSpecialityRepository;
     }
 
     @Override

@@ -9,7 +9,7 @@
 </h2>
 <form id="updateSpeciality" action="#" th:action="@{/speciality/updateSpeciality}" th:object="${specialityToUpdate}"
       method="post">
-    <input type="text" th:field="*{id}">
+    <p>ID: <input type="text" th:field="*{id}" readonly></p>
     <p>Code: <input type="text" th:field="*{code}"/></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>

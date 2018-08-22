@@ -8,7 +8,7 @@
     Edit college info
 </h2>
 <form id="updateCollege" action="#" th:action="@{/college/updateCollege}" th:object="${collegeToUpdate}" method="post">
-    <input hidden="hidden" type="text" th:field="*{id}">
+    <p>ID: <input hidden="hidden" type="text" th:field="*{id}"></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p>Address: <input type="text" th:field="*{address}"/></p>
     <p>Director: <input type="text" th:field="*{director}"/></p>

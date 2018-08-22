@@ -13,7 +13,7 @@ public class College {
 
     @Id
     @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name", unique = true)
@@ -32,7 +32,7 @@ public class College {
     @Enumerated(EnumType.STRING)
     private OwnerShip ownerShip;
 
-    @OneToMany(mappedBy = "college")
+    @OneToMany(mappedBy = "college", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CollegeSpeciality> specialities = new HashSet<>();
 
     public College() {

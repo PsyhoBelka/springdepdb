@@ -27,9 +27,12 @@
                     th:value="${specilility.id}"
                     th:utext="${specilaity.code} + ${speciality.name}"></option>
         </select>-->
-    <ul>
-        <li th:each="speciality : ${specialities}">
-            <input type="checkbox" th:utext="${speciality.name}" th:value="${speciality.id}"/>
+    <ul style="margin-left: 0; padding-left: 0;">
+        <li th:each="speciality,counter : ${specialities}" style="list-style-type: none;">
+            <input type="checkbox" name="checkedSpecialities"
+                   th:id="${counter.count}"
+                   th:utext="${speciality.name}"
+                   th:value="${speciality.id}"/>
 
         </li>
     </ul>
