@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.rozhkov.springdepdb.DAO.entity.core.Speciality;
+import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
 import ua.rozhkov.springdepdb.service.SpecialityService;
 
 @Controller
@@ -26,27 +26,27 @@ public class SpecialityController {
 
     @RequestMapping("/add")
     public String showAddSpecialityPage(Model model) {
-        Speciality newSpeciality = new Speciality();
-        model.addAttribute("newSpeciality", newSpeciality);
+        Specialty newSpecialty = new Specialty();
+        model.addAttribute("newSpeciality", newSpecialty);
         return "speciality/addSpeciality";
     }
 
     @RequestMapping("/addNewSpeciality")
-    public String addNewSpeciality(@ModelAttribute Speciality newSpeciality) {
-        specialityService.add(newSpeciality);
+    public String addNewSpeciality(@ModelAttribute Specialty newSpecialty) {
+        specialityService.add(newSpecialty);
         return "redirect:/speciality/list";
     }
 
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
-        Speciality specialityToUpdate = specialityService.findById(id);
-        model.addAttribute("specialityToUpdate", specialityToUpdate);
+        Specialty specialtyToUpdate = specialityService.findById(id);
+        model.addAttribute("specialityToUpdate", specialtyToUpdate);
         return "speciality/editSpeciality";
     }
 
     @RequestMapping("/updateSpeciality")
-    public String updateSpeciality(@ModelAttribute Speciality specialityToUpdate) {
-        specialityService.update(specialityToUpdate);
+    public String updateSpeciality(@ModelAttribute Specialty specialtyToUpdate) {
+        specialityService.update(specialtyToUpdate);
         return "redirect:/speciality/list";
     }
 

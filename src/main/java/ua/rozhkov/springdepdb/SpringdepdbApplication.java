@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ua.rozhkov.springdepdb.DAO.entity.core.Speciality;
+import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
 import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.SpecialityService;
 
@@ -21,8 +21,8 @@ public class SpringdepdbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        specialityService.add(new Speciality("111", "111"));
-        specialityService.add(new Speciality("222", "222"));
+        specialityService.add(new Specialty("111", "111"));
+        specialityService.add(new Specialty("222", "222"));
     }
 
     /* @Bean

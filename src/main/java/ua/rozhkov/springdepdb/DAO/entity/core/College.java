@@ -1,39 +1,23 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
-import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
+import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "college")
+@Table(name = "colleges")
 public class College {
 
-    @Id
-    @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long id;
-
-    @Column(name = "name", unique = true)
     private String name;
-
-    @Column(name = "address")
     private String address;
-
-    @Column(name = "director", unique = true)
     private String director;
-
-    @Column(name = "phone")
     private String phone;
-
-    @Column(name = "ownerShip")
-    @Enumerated(EnumType.STRING)
     private OwnerShip ownerShip;
-
-    @OneToMany(mappedBy = "college", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CollegeSpeciality> specialities = new HashSet<>();
+    private Set<CollegeSpecialty> specialities = new HashSet<>();
 
     public College() {
     }
@@ -46,6 +30,9 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
+    @Id
+    @Column(name = "college_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -54,6 +41,7 @@ public class College {
         this.id = id;
     }
 
+    @Column(name = "name", unique = true)
     public String getName() {
         return name;
     }
@@ -62,6 +50,7 @@ public class College {
         this.name = name;
     }
 
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -70,6 +59,7 @@ public class College {
         this.address = address;
     }
 
+    @Column(name = "director", unique = true)
     public String getDirector() {
         return director;
     }
@@ -78,6 +68,7 @@ public class College {
         this.director = director;
     }
 
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -86,6 +77,8 @@ public class College {
         this.phone = phone;
     }
 
+    @Column(name = "ownerShip")
+    @Enumerated(EnumType.STRING)
     public OwnerShip getOwnerShip() {
         return ownerShip;
     }
@@ -94,24 +87,16 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
-    public Set<CollegeSpeciality> getSpecialities() {
+    @OneToMany(mappedBy = "college", cascade = CascadeType.ALL)
+    public Set<CollegeSpecialty> getSpecialities() {
         return specialities;
     }
 
-    public void setSpecialities(Set<CollegeSpeciality> specialities) {
+    public void setSpecialities(Set<CollegeSpecialty> specialities) {
         this.specialities = specialities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        College college = (College) o;
-        return Objects.equals(name, college.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
+    public void addSpeciality(CollegeSpecialty collegeSpeciality) {
+        this.getSpecialities().add(collegeSpeciality);
     }
 }

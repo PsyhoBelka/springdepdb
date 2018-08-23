@@ -1,10 +1,10 @@
 package ua.rozhkov.springdepdb.service;
 
 import org.springframework.stereotype.Service;
-import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
+import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 import ua.rozhkov.springdepdb.DAO.entity.core.Base;
 import ua.rozhkov.springdepdb.DAO.entity.core.College;
-import ua.rozhkov.springdepdb.DAO.entity.core.Speciality;
+import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
 import ua.rozhkov.springdepdb.DAO.repository.CollegeRepository;
 import ua.rozhkov.springdepdb.DAO.repository.SpecialityRepository;
 
@@ -24,14 +24,14 @@ public class CollegeSpecialityService {
     public void addSpecialitiesToCollege(College college, List<String> specialityIds, int studentsCount, Base base) {
 //        List<CollegeSpeciality> collegeWithSpecialityList = new ArrayList<>();
         for (String id : specialityIds) {
-            Speciality speciality = specialityRepository.findSpecialityById(Long.parseLong(id));
-            CollegeSpeciality tmpCollegeSpeciality = new CollegeSpeciality(college, speciality, studentsCount, base);
+            Specialty specialty = specialityRepository.findSpecialityById(Long.parseLong(id));
+            CollegeSpecialty tmpCollegeSpeciality = new CollegeSpecialty(college, specialty, studentsCount, base);
 //            college.getSpecialities().add(tmpCollegeSpeciality);
-//            speciality.getColleges().add(tmpCollegeSpeciality);
+//            specialty.getColleges().add(tmpCollegeSpeciality);
 //            collegeWithSpecialityList.add(tmpCollegeSpeciality);
-//            specialityRepository.save(speciality);
+//            specialityRepository.save(specialty);
         }
         collegeRepository.save(college);
-        Set<CollegeSpeciality> sp = college.getSpecialities();
+        Set<CollegeSpecialty> sp = college.getSpecialities();
     }
 }

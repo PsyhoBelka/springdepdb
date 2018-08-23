@@ -23,16 +23,16 @@
     <p>Choose specialities here:
         <!--<select form="newCollege" th:object="${specialities}" id="specialities">
             <option disabled value="0">Choose specilities here:</option>
-            <option th:each="speciality : ${specilities}"
+            <option th:each="specialty : ${specilities}"
                     th:value="${specilility.id}"
-                    th:utext="${specilaity.code} + ${speciality.name}"></option>
+                    th:utext="${specilaity.code} + ${specialty.name}"></option>
         </select>-->
     <ul style="margin-left: 0; padding-left: 0;">
-        <li th:each="speciality,counter : ${specialities}" style="list-style-type: none;">
+        <li th:each="specialty,counter : ${specialities}" style="list-style-type: none;">
             <input type="checkbox" name="checkedSpecialities"
                    th:id="${counter.count}"
-                   th:utext="${speciality.name}"
-                   th:value="${speciality.id}"/>
+                   th:utext="${specialty.name}"
+                   th:value="${specialty.id}"/>
 
         </li>
     </ul>

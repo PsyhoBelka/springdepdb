@@ -7,7 +7,7 @@
 <h2 align="center">
     Edit college info
 </h2>
-<form id="updateSpeciality" action="#" th:action="@{/speciality/updateSpeciality}" th:object="${specialityToUpdate}"
+<form id="updateSpeciality" action="#" th:action="@{/specialty/updateSpeciality}" th:object="${specialtyToUpdate}"
       method="post">
     <p>ID: <input type="text" th:field="*{id}" readonly></p>
     <p>Code: <input type="text" th:field="*{code}"/></p>
