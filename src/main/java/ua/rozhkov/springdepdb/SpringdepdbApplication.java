@@ -6,12 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
 import ua.rozhkov.springdepdb.service.CollegeService;
-import ua.rozhkov.springdepdb.service.SpecialityService;
+import ua.rozhkov.springdepdb.service.SpecialtyService;
 
 @SpringBootApplication
 public class SpringdepdbApplication implements CommandLineRunner {
     @Autowired
-    private SpecialityService specialityService;
+    private SpecialtyService specialtyService;
     @Autowired
     private CollegeService collegeService;
 
@@ -21,8 +21,8 @@ public class SpringdepdbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        specialityService.add(new Specialty("111", "111"));
-        specialityService.add(new Specialty("222", "222"));
+        specialtyService.add(new Specialty("111", "111"));
+        specialtyService.add(new Specialty("222", "222"));
     }
 
     /* @Bean

@@ -31,4 +31,22 @@ public class CollegeSpecialtyId implements Serializable {
     public void setSpecialty(Specialty specialty) {
         this.specialty = specialty;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CollegeSpecialtyId that = (CollegeSpecialtyId) o;
+
+        if (!college.equals(that.college)) return false;
+        return specialty.equals(that.specialty);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = college.hashCode();
+        result = 31 * result + specialty.hashCode();
+        return result;
+    }
 }

@@ -21,9 +21,9 @@
             <td th:utext="${specialty.code}">Code</td>
             <td th:utext="${specialty.name}">Name</td>
             <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/edit/__${specialty.id}__}"
-                                                            href="listSpeciality.html">edit</a></td>
+                                                            href="listSpecialty.html">edit</a></td>
             <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/delete/__${specialty.id}__}"
-                                                            href="listSpeciality.html">delete</a></td>
+                                                            href="listSpecialty.html">delete</a></td>
         </tr>
         <tr>
             <td style="text-align: right;" colspan="8"><a href="/specialty/add">+Add new specialty+</a></td>

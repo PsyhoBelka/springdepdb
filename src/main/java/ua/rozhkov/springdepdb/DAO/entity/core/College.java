@@ -11,7 +11,7 @@ import java.util.Set;
 public class College {
 
 
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private String director;
@@ -33,15 +33,15 @@ public class College {
     @Id
     @Column(name = "college_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -59,7 +59,7 @@ public class College {
         this.address = address;
     }
 
-    @Column(name = "director", unique = true)
+    @Column(name = "director")
     public String getDirector() {
         return director;
     }
@@ -87,7 +87,7 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
-    @OneToMany(mappedBy = "college", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "primaryKey.college", cascade = CascadeType.ALL)
     public Set<CollegeSpecialty> getSpecialities() {
         return specialities;
     }
@@ -98,5 +98,29 @@ public class College {
 
     public void addSpeciality(CollegeSpecialty collegeSpeciality) {
         this.getSpecialities().add(collegeSpeciality);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof College)) return false;
+
+        College college = (College) o;
+
+        if (!name.equals(college.name)) return false;
+        if (!address.equals(college.address)) return false;
+        if (!director.equals(college.director)) return false;
+        if (!phone.equals(college.phone)) return false;
+        return ownerShip == college.ownerShip;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + director.hashCode();
+        result = 31 * result + phone.hashCode();
+        result = 31 * result + ownerShip.hashCode();
+        return result;
     }
 }

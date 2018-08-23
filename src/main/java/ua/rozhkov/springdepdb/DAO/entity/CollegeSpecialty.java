@@ -22,21 +22,23 @@ public class CollegeSpecialty {
     }
 
     @Transient
-    private College getCollege() {
+    public College getCollege() {
         return getPrimaryKey().getCollege();
     }
 
-    private void setCollege(College college) {
+    public void setCollege(College college) {
         getPrimaryKey().setCollege(college);
+//        college.addSpeciality(this);
     }
 
     @Transient
-    private Specialty getSpecialty() {
+    public Specialty getSpecialty() {
         return getPrimaryKey().getSpecialty();
     }
 
-    private void setSpecialty(Specialty specialty) {
+    public void setSpecialty(Specialty specialty) {
         getPrimaryKey().setSpecialty(specialty);
+//        specialty.addCollege(this);
     }
 
     public void setPrimaryKey(CollegeSpecialtyId primaryKey) {

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Specialty {
 
 
-    private long id;
+    private Long id;
     private String name;
     private String code;
     private Set<CollegeSpecialty> colleges = new HashSet<>();
@@ -28,11 +28,11 @@ public class Specialty {
     @Id
     @Column(name = "specialty_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,7 +54,7 @@ public class Specialty {
         this.code = code;
     }
 
-    @OneToMany(mappedBy = "primarykey.speciality", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "primaryKey.specialty", cascade = CascadeType.ALL)
     public Set<CollegeSpecialty> getColleges() {
         return colleges;
     }
@@ -65,5 +65,23 @@ public class Specialty {
 
     public void addCollege(CollegeSpecialty collegeSpecialty) {
         this.getColleges().add(collegeSpecialty);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Specialty)) return false;
+
+        Specialty specialty = (Specialty) o;
+
+        if (!name.equals(specialty.name)) return false;
+        return code.equals(specialty.code);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + code.hashCode();
+        return result;
     }
 }

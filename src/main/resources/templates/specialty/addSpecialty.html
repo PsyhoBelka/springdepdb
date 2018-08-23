@@ -1,19 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit college info</title>
+    <title>Add new college</title>
 </head>
 <body style="background-color: palegoldenrod;">
 <h2 align="center">
-    Edit college info
+    Adding new college
 </h2>
-<form id="updateSpeciality" action="#" th:action="@{/specialty/updateSpeciality}" th:object="${specialtyToUpdate}"
+<form id="newSpecialty" action="#" th:action="@{/specialty/addNewSpecialty}" th:object="${newSpecialty}"
       method="post">
-    <p>ID: <input type="text" th:field="*{id}" readonly></p>
     <p>Code: <input type="text" th:field="*{code}"/></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>
-
 </body>
 </html>
