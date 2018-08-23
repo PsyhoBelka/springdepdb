@@ -1,10 +1,11 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
+import org.hibernate.annotations.GenericGenerator;
 import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "colleges")
@@ -17,7 +18,7 @@ public class College {
     private String director;
     private String phone;
     private OwnerShip ownerShip;
-    private Set<CollegeSpecialty> specialities = new HashSet<>();
+    private List<CollegeSpecialty> specialities = new LinkedList<>();
 
     public College() {
     }
@@ -32,7 +33,8 @@ public class College {
 
     @Id
     @Column(name = "college_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     public Long getId() {
         return id;
     }
@@ -88,11 +90,11 @@ public class College {
     }
 
     @OneToMany(mappedBy = "primaryKey.college", cascade = CascadeType.ALL)
-    public Set<CollegeSpecialty> getSpecialities() {
+    public List<CollegeSpecialty> getSpecialities() {
         return specialities;
     }
 
-    public void setSpecialities(Set<CollegeSpecialty> specialities) {
+    public void setSpecialities(List<CollegeSpecialty> specialities) {
         this.specialities = specialities;
     }
 

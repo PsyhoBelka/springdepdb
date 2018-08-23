@@ -29,7 +29,8 @@ public class CollegeSpecialtyService {
         CollegeSpecialty tmpCollegeSpecialty = new CollegeSpecialty();
         tmpCollegeSpecialty.setSpecialty(specialty1);
         tmpCollegeSpecialty.setCollege(college1);
-//        specialtyRepository.save(specialty1);
+        specialtyRepository.save(specialty1);
+        college1.getSpecialities().add(tmpCollegeSpecialty);
         collegeRepository.save(college1);
 
         /*for (String id : specialityIds) {
