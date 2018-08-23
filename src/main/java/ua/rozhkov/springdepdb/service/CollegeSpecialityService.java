@@ -27,7 +27,7 @@ public class CollegeSpecialityService {
             Speciality speciality = specialityRepository.findSpecialityById(Long.parseLong(id));
             CollegeSpeciality tmpCollegeSpeciality = new CollegeSpeciality(college, speciality, studentsCount, base);
 //            college.getSpecialities().add(tmpCollegeSpeciality);
-//            speciality.getColleges().add(tmpCollegeSpeciality);
+            speciality.getColleges().add(tmpCollegeSpeciality);
 //            collegeWithSpecialityList.add(tmpCollegeSpeciality);
 //            specialityRepository.save(speciality);
         }

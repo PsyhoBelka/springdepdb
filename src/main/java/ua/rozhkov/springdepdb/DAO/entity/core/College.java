@@ -1,5 +1,6 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
+import org.hibernate.annotations.GenericGenerator;
 import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
 
 import javax.persistence.*;
@@ -13,7 +14,9 @@ public class College {
 
     @Id
     @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "collGenerator", strategy = "increment")
+    @GeneratedValue(generator = "collGenerator")
     private long id;
 
     @Column(name = "name", unique = true)

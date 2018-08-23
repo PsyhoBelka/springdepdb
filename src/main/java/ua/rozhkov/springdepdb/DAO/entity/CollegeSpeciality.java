@@ -18,9 +18,6 @@ public class CollegeSpeciality implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-//    @EmbeddedId
-//    private CollegeSpecialityId id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     @JoinColumn(name = "college_id")
@@ -42,7 +39,6 @@ public class CollegeSpeciality implements Serializable {
     }
 
     public CollegeSpeciality(College college, Speciality speciality, int studentsOnSpeciality, Base base) {
-//        this.id=new CollegeSpecialityId(college.getId(),speciality.getId());
         this.college = college;
         this.speciality = speciality;
         this.studentsOnSpeciality = studentsOnSpeciality;

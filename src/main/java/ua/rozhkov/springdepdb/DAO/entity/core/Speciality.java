@@ -1,5 +1,6 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
+import org.hibernate.annotations.GenericGenerator;
 import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
 
 import javax.persistence.*;
@@ -13,7 +14,9 @@ public class Speciality {
 
     @Id
     @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "specGenerator", strategy = "increment")
+    @GeneratedValue(generator = "specGenerator")
     private long id;
 
     @Column(name = "name", unique = true)
@@ -26,13 +29,12 @@ public class Speciality {
     @OneToMany(mappedBy = "speciality", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CollegeSpeciality> colleges = new HashSet<>();
 
+    public Speciality() {
+    }
+
     public Speciality(String name, String code) {
         this.name = name;
         this.code = code;
-    }
-
-    public Speciality() {
-
     }
 
     public long getId() {

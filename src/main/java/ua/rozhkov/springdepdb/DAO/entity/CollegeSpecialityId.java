@@ -1,11 +1,10 @@
 package ua.rozhkov.springdepdb.DAO.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Embeddable
+//@Embeddable
 public class CollegeSpecialityId implements Serializable {
 
     @Column(name = "fk_college")
