@@ -1,42 +1,24 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
 import org.hibernate.annotations.GenericGenerator;
-import ua.rozhkov.springdepdb.DAO.entity.CollegeSpeciality;
+import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
-@Table(name = "college")
+@Table(name = "colleges")
 public class College {
 
-    @Id
-    @Column(name = "id", unique = true)
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    @GenericGenerator(name = "collGenerator", strategy = "increment")
-    @GeneratedValue(generator = "collGenerator")
-    private long id;
 
-    @Column(name = "name", unique = true)
+    private Long id;
     private String name;
-
-    @Column(name = "address")
     private String address;
-
-    @Column(name = "director", unique = true)
     private String director;
-
-    @Column(name = "phone")
     private String phone;
-
-    @Column(name = "ownerShip")
-    @Enumerated(EnumType.STRING)
     private OwnerShip ownerShip;
-
-    @OneToMany(mappedBy = "college", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CollegeSpeciality> specialities = new HashSet<>();
+    private List<CollegeSpecialty> specialities = new LinkedList<>();
 
     public College() {
     }
@@ -49,14 +31,19 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
-    public long getId() {
+    @Id
+    @Column(name = "college_id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -65,6 +52,7 @@ public class College {
         this.name = name;
     }
 
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -73,6 +61,7 @@ public class College {
         this.address = address;
     }
 
+    @Column(name = "director")
     public String getDirector() {
         return director;
     }
@@ -81,6 +70,7 @@ public class College {
         this.director = director;
     }
 
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -89,6 +79,8 @@ public class College {
         this.phone = phone;
     }
 
+    @Column(name = "ownerShip")
+    @Enumerated(EnumType.STRING)
     public OwnerShip getOwnerShip() {
         return ownerShip;
     }
@@ -97,24 +89,40 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
-    public Set<CollegeSpeciality> getSpecialities() {
+    @OneToMany(mappedBy = "primaryKey.college", cascade = CascadeType.ALL)
+    public List<CollegeSpecialty> getSpecialities() {
         return specialities;
     }
 
-    public void setSpecialities(Set<CollegeSpeciality> specialities) {
+    public void setSpecialities(List<CollegeSpecialty> specialities) {
         this.specialities = specialities;
+    }
+
+    public void addSpeciality(CollegeSpecialty collegeSpeciality) {
+        this.getSpecialities().add(collegeSpeciality);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof College)) return false;
+
         College college = (College) o;
-        return Objects.equals(name, college.name);
+
+        if (!name.equals(college.name)) return false;
+        if (!address.equals(college.address)) return false;
+        if (!director.equals(college.director)) return false;
+        if (!phone.equals(college.phone)) return false;
+        return ownerShip == college.ownerShip;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        int result = name.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + director.hashCode();
+        result = 31 * result + phone.hashCode();
+        result = 31 * result + ownerShip.hashCode();
+        return result;
     }
 }
